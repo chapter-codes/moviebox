@@ -1,5 +1,5 @@
 import Logo from '../../assets/tv.svg'
-import SearchIcon from '../../assets/search.svg'
+import SearchIcon from '../../assets/Search.svg'
 import MenuIcon from '../../assets/Menu.svg'
 
 
