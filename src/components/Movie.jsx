@@ -157,7 +157,7 @@ export default function Movie() {
             </div>
             <div className="overview-section mt-4 gap-2 flex justify-between">
                 <div className="left w-[60%] grow">
-                    <p className="overview text-[#333333] pr-10">{movie.overview}</p>
+                    <p className="overview text-[#333333] pr-10" data-tesid="movie-overview" >{movie.overview}</p>
                     <p className="text-[14px] text-[#333333] font-[500] my-4 ">Directors: <span className=" text-[#BE123C]">{movie.directors.join(', ')}</span></p>
                     <p className="text-[14px] text-[#333333] font-[500] mb-4">Writers: <span className=" text-[#BE123C]">{movie.writers.join(', ')}</span></p>
                     <p className="text-[14px] text-[#333333] font-[500] ">Stars:  <span className=" text-[#BE123C]">{movie.sortedCast.join(', ')}</span></p>
