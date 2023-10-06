@@ -2,9 +2,18 @@ import Logo from '../../assets/tv.svg'
 import SearchIcon from '../../assets/Search.svg'
 import MenuIcon from '../../assets/Menu.svg'
 
+import {useMovieContext} from '../context/MovieContext'
 
-export default function Header({ searchText, setSearchText }) {
-    // console.log(setSearchText)
+
+export default function Header() {
+    const {searchText, setSearchText, setState} = useMovieContext()
+
+    const handleEvent=(event)=>{
+      const {value:text} =event.target
+      console.log(text)
+      text != ''? setState('searchFocused') :setState('resolved')
+      setSearchText(text)
+    }
     return (
       <>
             <div className=" py-4 px-8 header w-full flex justify-evenly items-center gap-3 relative z-10">
@@ -18,7 +27,7 @@ export default function Header({ searchText, setSearchText }) {
                       name="search-movie" 
                       id="search-movie"
                       placeholder='What do you want to watch?' 
-                        onChange={(event) => setSearchText(event.target.value)}
+                        onChange={handleEvent}
                         value={searchText}
                    />
                   <img className='w-[12px] h-[12px]' src={SearchIcon} alt="search icon" />

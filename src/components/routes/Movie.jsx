@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import Loading from "./Loading"
-import ErrorFallback from "./ErrorFallback"
+import Loading from "../standalone/Loading"
+import ErrorFallback from "../error/ErrorFallback"
 import { useParams, NavLink, useNavigate } from 'react-router-dom'
 
 
-import Logo from '../assets/tv.svg'
-import Home from '../assets/Home.svg'
-import MovieProjector from '../assets/Movie Projector.svg'
-import TVShow from '../assets/TV Show.svg'
-import Calendar from '../assets/Calendar.svg'
-import Logout from '../assets/Logout.svg'
-import Play from '../assets/Play.svg'
-import Star from '../assets/Star.svg'
-import Tickets from '../assets/two-tickets.svg'
-import MoreOptions from '../assets/more-options.svg'
-import List from '../assets/List.svg'
-// import TopRated from '../assets/top-rated.svg'
-import MovieStats from '../assets/movie-stats.svg'
+import Logo from '../../assets/tv.svg'
+import Home from '../../assets/Home.svg'
+import MovieProjector from '../../assets/Movie Projector.svg'
+import TVShow from '../../assets/TV Show.svg'
+import Calendar from '../../assets/Calendar.svg'
+import Logout from '../../assets/Logout.svg'
+import Play from '../../assets/Play.svg'
+import Star from '../../assets/Star.svg'
+import Tickets from '../../assets/two-tickets.svg'
+import MoreOptions from '../../assets/more-options.svg'
+import List from '../../assets/List.svg'
+// import TopRated from '../../assets/top-rated.svg'
+import MovieStats from '../../assets/movie-stats.svg'
 
 
 

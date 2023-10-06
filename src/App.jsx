@@ -1,11 +1,12 @@
 import MovieBox from './components/App'
+import {MovieContextProvider} from './components/context/MovieContext'
 
 function App() {
  
   return (
-    <>
-    <MovieBox />
-    </>
+    <MovieContextProvider>
+      <MovieBox />
+    </ MovieContextProvider>
   )
 }
 

@@ -6,8 +6,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from './App.jsx'
-import Movie from './components/Movie'
-import RouteErrorPage from "./RouteErrorPage.jsx";
+import Movie from './components/routes/Movie'
+import RouteErrorPage from "./components/error/RouteErrorPage";
+
 
 import './index.css'
 

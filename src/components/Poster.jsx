@@ -9,8 +9,8 @@ import WatchTrailer from '../assets/watch-trailer.svg'
 
 
 
-export default function Poster({ poster, searchText, setSearchText }) {
-    // console.log('poster', setSearchText);
+export default function Poster({ poster }) {
+    console.log('poster', poster);
     
     const {backdrop_path, vote_average, original_title, overview}=poster
     const imageBaseUrl='https://image.tmdb.org/t/p/original'
@@ -22,7 +22,7 @@ export default function Poster({ poster, searchText, setSearchText }) {
     src={imageBaseUrl+ backdrop_path } alt="poster"  />
 
 
-    <Header searchText={searchText} setSearchText={setSearchText} />
+    <Header />
     <div className="poster-card py-12 px-12 relative z-10 md:w-3/5 lg:w-2/5">
         <p className="poster-title text-5xl my-4">{original_title}</p>
         <div className="rating flex gap-2">

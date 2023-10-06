@@ -1,4 +1,4 @@
-import Logo from '../assets/tv.svg'
+import Logo from '../../assets/tv.svg'
 
 export default function Loading() {
   return (

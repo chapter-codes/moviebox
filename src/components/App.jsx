@@ -2,27 +2,18 @@ import {useState, useEffect} from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import axios from 'axios'
 
-import Loading from './Loading'
 import Poster from './Poster'
 import Movies from './Movies'
+import SearchPage from './SearchPage'
 import Footer from './standalone/Footer'
-import ErrorFallback from './ErrorFallback'
-// import SearchPage from './SearchPage'
-
-
+import Loading from './standalone/Loading'
+import ErrorFallback from './error/ErrorFallback'
+import {useMovieContext} from './context/MovieContext'
 
 export default function App (){
-    const [loading, setLoading]=useState(true)
-    const [poster, setPoster]=useState('')
-    const [movies, setMovies]    =useState('')
-    const [error, setError]    =useState(false)
-    const [searchText, setSearchText] = useState('')
-
- 
+   const {poster, setPoster, movies, setMovies, state, setState, error, setError}= useMovieContext()  
    
-
     useEffect(()=>{
-        
             loadMovies()
             .then(res=>{
                 const data={...res.data}
@@ -33,42 +24,38 @@ export default function App (){
                 
                 setPoster(...posterData)
                 setMovies(moviesList)
-                setLoading(false)
+                setState("resolved")
                 
             })
             .catch(err=> setError(err))
 
-    }, [error])
+    }, [])
 
   return(
     <>
         {
-        error?<ErrorFallback err={error} setError={setError}/>
-
-       : loading? <><Loading /></>:
-        <>
-              <Poster poster={poster} searchText={searchText} setSearchText={setSearchText} />
-              {
-                // searchText ? <SearchPage searchText={searchText} /> : <Movies movies={movies} />
-                <Movies movies={movies}   />
-                
-
-              }
-              
-          <Footer />
-        
-          
-        </>
-}
-</>
+            error? <ErrorFallback
+                     err={error}
+                     setError={setError}
+                    />
+           : state=='loading'? <><Loading /></>
+           : state=='searchFocused'?
+            <>
+                <SearchPage />
+                <Footer />
+            </>
+           : state=='resolved'? <>
+                <Poster poster={poster} />
+                <Movies movies={movies} />
+                <Footer />
+            </>
+           : null
+        }
+    </>
   )
-
-
 }
-{/*   */}
 
 async function loadMovies(url){    
-   
    const headers=
     {
       accept: 'application/json',
