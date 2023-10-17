@@ -13,16 +13,18 @@ export default function SearchPage() {
  const [page, setPage]= useState(0)
 
     useEffect(() => {
-        searchMovies(searchText)
-        .then(res=>{
-        	console.log(res.data)
-	       	setSearch(res.data.results)
-        })
-
-        .catch(err=>{
-            console.error(err);
-            setError(err)
-        })
+        (async function(){
+            try{
+                const res= await searchMovies(searchText)
+                console.log(res.data)
+                setSearch(res.data.results)
+            }
+            catch(err){
+                console.error(err);
+                setError(err)
+            }
+        })()
+       
     },[searchText])
 
   
@@ -38,9 +40,7 @@ export default function SearchPage() {
     
         </div>:
         <>
-        <Poster poster={search.slice(0,1).length==0? poster : search.slice(0,1)[0] } />
-        <Movies movies={search} />    
-        	
+            <Movies movies={search} />    
         </>
     )
 }

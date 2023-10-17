@@ -1,17 +1,12 @@
-import {useEffect} from 'react'
+import {useMediaQuery } from 'react-responsive'
 
 export function useMedia(){
-const checkScreenSize= window.matchMedia("max-width:680px")
+	const size=useMediaQuery({minWidth:810})? 'Desktop':
+		useMediaQuery({minWidth:600})? 'Tablet':
+		'Mobile'
 
-console.log(checkScreenSize)
+	console.log('SCREEN SIZE: ', size)
 
-	useEffect(()=>{
-		console.log('im rendering')
-		checkScreenSize.addListener('onchange',  ()=>{
-			console.log('screen change')
-			console.log(window.screen)
-		})
-	}) 
+	return size	
+}	
 
-return (console.log('hey!, useMedia  '))
-}

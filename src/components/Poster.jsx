@@ -3,6 +3,7 @@ import Header from './standalone/Header'
 import Imdb from '../assets/imdb.svg'
 import Tomato from '../assets/tomato.svg'
 import WatchTrailer from '../assets/watch-trailer.svg'
+import {useMovieContext} from './context/MovieContext'
 
 
 
@@ -10,21 +11,20 @@ import WatchTrailer from '../assets/watch-trailer.svg'
 
 
 export default function Poster({ poster }) {
-    console.log('poster', poster);
+    const {screenSize} =useMovieContext() 
+    const{posterClass, titleClass}= styles(screenSize)
     
     const {backdrop_path, vote_average, original_title, overview}=poster
-    const imageBaseUrl='https://image.tmdb.org/t/p/original'
+    const imageBaseUrl= screenSize=='Mobile'?
+      'https://image.tmdb.org/t/p/w500'  
+    :'https://image.tmdb.org/t/p/original'
 
   return (<>
-    <div className={`poster  w-full  bg-gray-500  bg-[url('${'https://image.tmdb.org/t/p/original'+ backdrop_path}')] relative`}>
-    <img 
-        className='absolute  w-full max-h-[600px]  top-0 left-0 h-full object-cover'
-    src={imageBaseUrl+ backdrop_path } alt="poster"  />
-
-
+    <div style={{backgroundImage:`url(${imageBaseUrl+backdrop_path})`}}className={posterClass} >
+ 
     <Header />
     <div className="poster-card py-12 px-12 relative z-10 md:w-3/5 lg:w-2/5">
-        <p className="poster-title text-5xl my-4">{original_title}</p>
+        <p className={titleClass}>{original_title}</p>
         <div className="rating flex gap-2">
             <div className="imdb flex">
                 <img className=' w-9 h-4' src={Imdb} alt="imdb logo" />
@@ -49,3 +49,21 @@ export default function Poster({ poster }) {
   )
 }
 
+
+
+function styles(size){
+    let posterClass=`poster  w-full  bg-gray-500 relative bg-center bg-no-repeat bg-cover`, titleClass=`poster-title text-3xl  my-3`,
+        overviewStyle;
+
+    if(size=="Mobile"){
+    
+    }   
+    else if(size=='Tablet'){
+        titleClass=`poster-title text-5xl my-4`
+
+    }
+    else{
+         
+    }
+    return {posterClass, overviewStyle, titleClass}
+}
