@@ -16,7 +16,7 @@ export default function Header() {
     }
     return (
       <>
-            <div className=" py-4 px-8 header w-full flex justify-evenly items-center gap-3 relative z-10">
+            <div className={`py-4 px-4 header w-full flex justify-evenly items-center gap-3 relative z-10`}>
               <div className="logo-wrapper flex gap-4 items-center">
                   <img className='h-[30px] w-[30px] ' src={Logo} alt="logo" />
                   {screenSize!="Mobile" && <p>MovieBox</p> }
