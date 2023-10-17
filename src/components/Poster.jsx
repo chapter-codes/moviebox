@@ -16,7 +16,7 @@ export default function Poster({ poster }) {
     
     const {backdrop_path, vote_average, original_title, overview}=poster
     const imageBaseUrl= screenSize=='Mobile'?
-      'https://image.tmdb.org/t/p/w500'  
+      'https://image.tmdb.org/t/p/original'  
     :'https://image.tmdb.org/t/p/original'
 
   return (<>
