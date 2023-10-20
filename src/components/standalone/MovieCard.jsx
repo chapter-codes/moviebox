@@ -35,15 +35,15 @@ export default function MovieCard({ movie }) {
    <div data-testid='movie-card'>
       <img src={imageUrl + poster_path} alt="" data-testid='movie-poster' onClick={navigateToMovie} id={id} />
         <p className="release_date text-xs text-[#9CA3AF] pt-4 pb-2"  data-testid='movie-release-date'> USA, {releaseUTCYear}</p> 
-        <p className="title text-base  text-[#111827] font-[700] py-2" data-testid='movie-title'>{original_title}</p>
+        <p className="title text-xs text-[#111827] font-[700] py-2 lg:text-base" data-testid='movie-title'>{original_title}</p>
         <div className="rating py-3 pr-2 flex justify-between gap-2">
                 <div className="imdb flex">
-                    <img className=' w-9 h-4 pr-3' src={Imdb} alt="imdb logo" />
-                    <p className="text-xs text-[#111827]">{(vote_average*10).toFixed(1)} / 100</p>
+                    <img className=' w-6 h-4 pr-3' src={Imdb} alt="imdb logo" />
+                    <p className="text-[.625rem] text-[#111827]">{(vote_average*10).toFixed(1)} / 100</p>
                 </div>
                 <div className="rotten-tomatoes flex gap-2">
                 <   img className='w-2 h-2 md:w-4 md:h-4' src={Tomato} alt="tomato logo" />
-                    <p className="text-xs text-[#111827]">{(vote_average*10).toFixed(0)}%</p>
+                    <p className="text-[.625rem] text-[#111827]">{(vote_average*10).toFixed(0)}%</p>
                 </div>
           </div>
           <div className="genres flex">
