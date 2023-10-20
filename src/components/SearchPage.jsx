@@ -29,19 +29,26 @@ export default function SearchPage() {
 
   
     return (
+        <div className=""> 
+        {
+            error? 
+            <div className="h-24 w-full flex justify-center">
+            <p className="text-red-500 text-center">{ error.message}</p>
+            </div> :
+            !search?
+             <div className="h-24 w-full flex justify-center" >
+                <p className="text-black">Loading...</p>
+        
+            </div>:
+            <> 
+                 <div className="my-">
+                    <p className="results text-black text-center text-2xl">Results</p>
+                    <Movies movies={search} /> 
+                </div>   
+            </>
+     }
+    </div> 
 
-        error? 
-        <div className="h-24 w-full flex justify-center">
-        <p className="text-red-500 text-center">{ error.message}</p>
-        </div> :
-        !search?
-         <div className="h-24 w-full flex justify-center" >
-            <p className="text-black">Loading...</p>
-    
-        </div>:
-        <>
-            <Movies movies={search} />    
-        </>
     )
 }
 
