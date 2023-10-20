@@ -14,7 +14,7 @@ export default function Poster({ poster }) {
     const navigate=useNavigate()
 
   return (<>
-    <div className={`poster  w-full  bg-gray-500 relative bg-center bg-no-repeat bg-cover lg:h-[600px]`} style={{backgroundImage:`url(${imageBaseUrl+backdrop_path})`}} >
+    <div className={`poster  w-full  bg-gray-500 bg-center bg-no-repeat bg-cover lg:h-[600px]`} style={{backgroundImage:`url(${imageBaseUrl+backdrop_path})`}} >
  
             {/*<Header />*/}
             {/*onClick={()=>navigate('/movies/'+id)}*/}
