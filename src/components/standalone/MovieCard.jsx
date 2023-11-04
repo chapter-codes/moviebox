@@ -32,7 +32,7 @@ export default function MovieCard({ movie }) {
 
 
   return (
-   <div data-testid='movie-card'>
+   <div data-testid='movie-card  max-w-vw'>
       <img src={imageUrl + poster_path} alt="" data-testid='movie-poster' onClick={navigateToMovie} id={id} />
         <p className="release_date text-xs text-[#9CA3AF] pt-4 pb-2"  data-testid='movie-release-date'> USA, {releaseUTCYear}</p> 
         <p className="title text-xs text-[#111827] font-[700] py-2 lg:text-base" data-testid='movie-title'>{original_title}</p>
@@ -46,9 +46,9 @@ export default function MovieCard({ movie }) {
                     <p className="text-[.625rem] text-[#111827]">{(vote_average*10).toFixed(0)}%</p>
                 </div>
           </div>
-          <div className="genres flex">
+          <div className="genres flex flex-wrap ">
             {
-                movieGenres.map(genre=> <p className="genre-ids text-[#9CA3AF] text-[0.625rem] pl-1 md:text-[.6875rem] lg:text-xs" key={genre}>{genre}</p>)
+                movieGenres.map(genre=> <p className="genre-ids  text-[#9CA3AF] text-[0.625rem] pl-1 md:text-[.6875rem] lg:text-xs" key={genre}>{genre}</p>)
             
             }        
           </div>

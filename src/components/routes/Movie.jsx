@@ -94,8 +94,8 @@ export default function Movie() {
   return (
     error? <ErrorFallback err={error} setError={setError} /> :
     loading? <Loading /> : 
-    <div className="flex h-full w-full "> 
-       <div className="sidebar flex flex-col w-auto justify-evenly rounded-3xl border-r-[1px] border-black mdw-[180px]  md:h-screen md:fixed ">
+    <div className=" md:flex h-full w-full "> 
+       <div className="sidebar hidden  flex-col w-auto justify-evenly rounded-3xl border-r-[1px] border-black mdw-[180px]  md:h-screen md:fixed ">
        <p className=" flex justify-center items-center text-[#333333] px-2 mt-6 mb-4 font-bold  ">
         <img  className="w-[55px] h-[55px] pr-4 " src={Logo} alt="home icon" /> MovieBox</p>
 
@@ -117,7 +117,7 @@ export default function Movie() {
         <p  className="font-bold flex items-center text-[#666666]  pl-8 py-2"><img  className="w-[40px] h-[40px] pr-4"src={Logout} alt="home icon" />Logout</p>
        </div>
 
-        <div className="movie  grow px-2 pt-6 md:px-8 md:ml-[180px]">
+        <div className="movie  grow px-2 pt-6">
             <div className={`poster w-full h-[40vh] md:h-[45vh] relative`}>
                 <img className='absolute w-full  h-full top-0 left-0 rounded-2xl overflow-hidden object-cover' src={imageBaseUrl+ movie.backdrop_path} alt="movie poster" />
 
@@ -129,36 +129,42 @@ export default function Movie() {
                 </div>
                 
             </div>
-            <div className="flex justify-between items-center pt-2 ">
-                <div className="left flex gap-2">
+            <div className="flex flex-col justify-between md:flex-row md:items-center pt-2 ">
+                <div className="left flex flex-col md:flex-row gap-2">
                     <p className=" font-bold text-[#404040] text-sm" data-testid='movie-title'>{movie.title}</p>
-                    <div className=" font-bold dot text-[#404040] text-[1.5rem] leading-[9px] ">.</div>
-                    <p className=" font-bold text-[#404040] text-sm" data-testid='movie-release-date'>{utcYear}</p>
-                    <div className="dot text-[#404040] text-[1.5rem] leading-[9px] ">.</div>
-                    <p className=" font-bold text-[#404040] text-sm">{movie.adult?'PG-18': 'PG-13'}</p>
-                    <div className="dot text-[#404040] text-[1.5rem] leading-[9px]">.</div>
-                    <p className=" font-bold text-[#404040] text-sm" data-testid='movie-runtime'>{String(Math.floor(movie.runtime/60)).padStart(2,0)+'h'}  {String(Math.floor(movie.runtime%60)).padStart(2, '0') +'m'}</p>
-                    <div className="flex items-center gap-2">
-                        {
-                            movie.genres.map(genre=><p className="text-[#B91C1C] text-[10px] py-1 font-bold border-[1px] border-[#F8E7EB] rounded-full  px-2" key={genre.id}>{genre.name}</p>)
-                        }    
-
+                    <div className="info-wrapper flex gap-2">
+                        <div className="flex">
+                            <div className=" font-bold dot  text-[#404040] text-[1.5rem] leading-[9px] ">.</div>
+                            <p className=" font-bold text-[#404040] text-sm" data-testid='movie-release-date'>{utcYear}</p>
+                        </div>
+                        <div className="flex">
+                            <div className="dot font-bold text-[#404040] text-[1.5rem] leading-[9px] ">.</div>
+                            <p className=" font-bold text-[#404040] text-sm">{movie.adult?'PG-18': 'PG-13'}</p>
+                        </div>
+                        <div className="flex">
+                            <div className="dot font-bold text-[#404040] text-[1.5rem] leading-[9px]">.</div>
+                            <p className=" font-bold text-[#404040] text-sm" data-testid='movie-runtime'>{String(Math.floor(movie.runtime/60)).padStart(2,0)+'h'}  {String(Math.floor(movie.runtime%60)).padStart(2, '0') +'m'}</p>
+                        </div>
                     </div>
-            
-
+                        
+                    <div className=" grow flex justify-between gap-2">
+                        <div className="flex">
+                            {
+                                movie.genres.map(genre=><p className="text-[#B91C1C] text-[10px] py-1 font-bold border-[1px] border-[#F8E7EB] rounded-full  px-2" key={genre.id}>{genre.name}</p>)
+                            }    
+                        </div>
+                        <div className="right flex justify-center items-center gap-2">
+                            <img src={Star} alt="rating" className="w-[20px] h-[20px]" />
+                            <p className="text-[#E8E8E8] text-xs">{movie.vote_average.toFixed(1)}</p>
+                            <p className="text-[#666666] text-sm font-bold pl-2 border-l-[2px] border-[#666666] ">{(movie.vote_count/1000).toFixed(2)}K</p>
+                        </div>
+                    </div>
                 </div>
-                <div className="left flex justify-center items-center gap-2">
-                    <img src={Star} alt="rating" className="w-[20px] h-[20px]" />
-                    <p className="text-[#E8E8E8] text-xs">{movie.vote_average.toFixed(1)}</p>
-                    <p className="text-[#666666] text-sm font-bold pl-2 border-l-[2px] border-[#666666] ">{(movie.vote_count/1000).toFixed(2)}K</p>
-                </div>
-
-
             </div>
-            <div className="overview-section mt-4 gap-2 flex justify-between">
-                <div className="left w-[60%] grow">
-                    <p className="overview text-[#333333] pr-10" data-tesid="movie-overview" >{movie.overview}</p>
-                    <p className="text-[14px] text-[#333333] font-[500] my-4 ">Directors: <span className=" text-[#BE123C]">{movie.directors.join(', ')}</span></p>
+            <div className="overview-section mt-4 gap-2 flex flex-col md:flex-row justify-between">
+                <div className="left md:w-[60%] grow">
+                    <p className="overview text-[#333333] px-2 md:pr-10" data-tesid="movie-overview" >{movie.overview}</p>
+                    <p className="text-[14px] text-[#2d2525] font-[500] my-4 ">Directors: <span className=" text-[#BE123C]">{movie.directors.join(', ')}</span></p>
                     <p className="text-[14px] text-[#333333] font-[500] mb-4">Writers: <span className=" text-[#BE123C]">{movie.writers.join(', ')}</span></p>
                     <p className="text-[14px] text-[#333333] font-[500] ">Stars:  <span className=" text-[#BE123C]">{movie.sortedCast.join(', ')}</span></p>
                     <div className="rating mt-6 pr-10">
