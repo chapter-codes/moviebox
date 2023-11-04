@@ -7,7 +7,6 @@ import {useNavigate} from 'react-router-dom'
 
 
 export default function Poster({ poster }) {
-    // const {screenSize} =useMovieContext() 
  
     const {backdrop_path, vote_average, original_title, overview, id}=useMovieContext().poster
     const imageBaseUrl='https://image.tmdb.org/t/p/original'
@@ -15,9 +14,6 @@ export default function Poster({ poster }) {
    
   return (<>
     <div className={`poster  w-full pt-12 pb-6 bg-gray-500 relative bg-center bg-no-repeat bg-cover lg:h-[450px]`} style={{backgroundImage:`url(${imageBaseUrl+backdrop_path})`}} >
- 
-            {/*<Header />*/}
-            {/*onClick={()=>navigate('/movies/'+id)}*/}
             <div className="poster-card px-6  md:px-12 relative z-10   sm:w-3/5 ">
                 <p className={`poster-title text-2xl  font-bold m py-8 md:text-2xl lg:text-3xl`}>{original_title}</p>
                 <div className="rating flex gap-4">
@@ -39,24 +35,5 @@ export default function Poster({ poster }) {
   )
 }
 
-
-
-function styles(){
-  const  
-  posterClass=`poster  w-full  bg-gray-500 relative bg-center bg-no-repeat bg-cover`,
-  titleClass=`poster-title text-3xl  mt-10 py-4`,
-  overviewStyle=``;
-
-return {posterClass, overviewStyle, titleClass}
-}
-    
-    // if(size=="Mobile"){
-    
-    // }   
-    // else if(size=='Tablet'){
-    //     titleClass=`poster-title text-5xl my-4`
-
-    // }
-    // else{
          
     
