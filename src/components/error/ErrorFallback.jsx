@@ -1,8 +1,8 @@
-import {useMovieContext} from '../context/MovieContext'
+// import {useMovieContext} from '../context/MovieContext'
 
-export default function ErrorFallback() {
-    const {error, setError}= useMovieContext()
-    function reset(){
+export default function ErrorFallback({error, setError}) {
+  console.log(error)
+  function reset(){
       setError(false)
     }
     return (

@@ -1,13 +1,13 @@
 import MovieCard  from './standalone/MovieCard'
 import ChevronRight from '../assets/Chevron right.svg'
 
-export default function Movies({movies, setSearchResults}) {
-   console.log(movies)
+export default function Movies({movies, showFeat=true}) {
+   console.log(movies, showFeat)
   // setSearchResults? 
   return (
     <>
 
-        <div className='pt-8 px-8 flex justify-between items-center lg:px-8 '>
+        <div className={`pt-8 px-8 flex justify-between items-center lg:px-8 ${showFeat?'':'hidden'}`}>
           <p className="text-sm text-black font-bold sm:text-[20px]">Featured Movie</p>
           <p className='text-xs  text-[#BE123C] '>See more <img className='inline-block px-2 w-[30px] h-[30px]' src={ChevronRight} alt="see more" /></p>
         </div>

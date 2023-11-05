@@ -92,10 +92,23 @@ export default function Movie() {
     },[error])
 
   return (
-    error? <ErrorFallback err={error} setError={setError} /> :
-    loading? <Loading /> : 
-    <div className=" md:flex h-full w-full "> 
-       <div className="sidebar hidden  flex-col w-auto justify-evenly rounded-3xl border-r-[1px] border-black mdw-[180px]  md:h-screen md:fixed ">
+    error? <ErrorFallback error={error} setError={setError} />
+    :loading? <Loading /> : 
+    <div className="flex flex-col md:flex-row h-full w-full "> 
+     <div className="sidebar-mobile flex justify-between md:hidden px-4 py-4">
+            <p className="flex items-center gap-1 ">
+                <img src={Logo}  className="w-8 h-8" alt="Logo" />
+                <span className="text-[#333] text-sm font-bold md:text-base">Moviebox</span>
+            </p>
+            <div className="right flex gap-1 justify-end items-center items-center">
+                <img src={Home} alt="Home" className="" onClick={()=>{navigateTo('/')}} />
+                <img src={MovieProjector} alt="movies" className="" onClick={()=>{navigateTo('/movies')}} />
+                <img src={TVShow} alt="tv series" className="" onClick={()=>{navigateTo('/series')}}  />
+                <img src={Calendar} alt="upcoming" className="" onClick={()=>{navigateTo('/upcoming')}} />
+
+            </div>
+        </div>
+       <div className="sidebar hidden md:flex  md:flex-col justify-evenly rounded-3xl border-r-[1px] border-black md:min-w-[180px] md:min-h-[600px] overflow-y-scroll  ">
        <p className=" flex justify-center items-center text-[#333333] px-2 mt-6 mb-4 font-bold  ">
         <img  className="w-[55px] h-[55px] pr-4 " src={Logo} alt="home icon" /> MovieBox</p>
 
@@ -117,11 +130,9 @@ export default function Movie() {
         <p  className="font-bold flex items-center text-[#666666]  pl-8 py-2"><img  className="w-[40px] h-[40px] pr-4"src={Logout} alt="home icon" />Logout</p>
        </div>
 
-        <div className="movie  grow px-2 pt-6">
-            <div className={`poster w-full h-[40vh] md:h-[45vh] relative`}>
-                <img className='absolute w-full  h-full top-0 left-0 rounded-2xl overflow-hidden object-cover' src={imageBaseUrl+ movie.backdrop_path} alt="movie poster" />
-
-                <div className="watch-trailer absolute w-full h-full flex flex-col justify-center items-center top-0 left-0">
+        <div className="movie grow px-2 pt-2 pb-8">
+            <div className={`poster w-full  min-h-[180px] md:min-h-[350px] md:h-[45vh] rounded-2xl overflow-hidden bg-cover bg-right-top flex items-center justify-center`} style={{'backgroundImage':`url('${imageBaseUrl+ movie.backdrop_path}')`}}>
+                <div className="watch-trailer flex flex-col justify-center items-center">
                 <   div className="play flex items-center justify-center rounded-full w-20 h-20 bg-[#E5E7EB] opacity-60 hover:opacity-80">
                       <img src={Play} alt="watch trailer" />
                     </div>
@@ -130,7 +141,7 @@ export default function Movie() {
                 
             </div>
             <div className="flex flex-col justify-between md:flex-row md:items-center pt-2 ">
-                <div className="left flex flex-col md:flex-row gap-2">
+                <div className="left flex flex-col lg:flex-row flex-wrap gap-2 lg:w-full">
                     <p className=" font-bold text-[#404040] text-sm" data-testid='movie-title'>{movie.title}</p>
                     <div className="info-wrapper flex gap-2">
                         <div className="flex">
@@ -147,13 +158,13 @@ export default function Movie() {
                         </div>
                     </div>
                         
-                    <div className=" grow flex justify-between gap-2">
+                    <div className=" grow flex justify-between gap-2 flex-wrap">
                         <div className="flex">
                             {
                                 movie.genres.map(genre=><p className="text-[#B91C1C] text-[10px] py-1 font-bold border-[1px] border-[#F8E7EB] rounded-full  px-2" key={genre.id}>{genre.name}</p>)
                             }    
                         </div>
-                        <div className="right flex justify-center items-center gap-2">
+                        <div className="right flex justify-center items-center gap-2 ">
                             <img src={Star} alt="rating" className="w-[20px] h-[20px]" />
                             <p className="text-[#E8E8E8] text-xs">{movie.vote_average.toFixed(1)}</p>
                             <p className="text-[#666666] text-sm font-bold pl-2 border-l-[2px] border-[#666666] ">{(movie.vote_count/1000).toFixed(2)}K</p>
@@ -163,28 +174,28 @@ export default function Movie() {
             </div>
             <div className="overview-section mt-4 gap-2 flex flex-col md:flex-row justify-between">
                 <div className="left md:w-[60%] grow">
-                    <p className="overview text-[#333333] px-2 md:pr-10" data-tesid="movie-overview" >{movie.overview}</p>
+                    <p className="overview text-[#333333] px-2 max-w-[800px] md:pr-12" data-tesid="movie-overview" >{movie.overview}</p>
                     <p className="text-[14px] text-[#2d2525] font-[500] my-4 ">Directors: <span className=" text-[#BE123C]">{movie.directors.join(', ')}</span></p>
                     <p className="text-[14px] text-[#333333] font-[500] mb-4">Writers: <span className=" text-[#BE123C]">{movie.writers.join(', ')}</span></p>
                     <p className="text-[14px] text-[#333333] font-[500] ">Stars:  <span className=" text-[#BE123C]">{movie.sortedCast.join(', ')}</span></p>
-                    <div className="rating mt-6 pr-10">
+                    <div className="rating mt-6 pr-10 lg:w-3/5">
                         <img src={MovieStats} alt=" rating statistics" className="h-16 w-auto" />    
                      </div>    
                 </div>
-                <div className="right flex flex-col gap-1 items-end">
+                <div className="rigt flex flex-col gap-1 items-center md:items-end">
                     <div className="">
-                        <img className="h-10 w-full max-w-12 pb-2" src={Tickets} alt="tickets" />
+                        <img className="h-10 w-full max-w-12 pb-2 " src={Tickets} alt="tickets" />
                         <img className="h-10 w-full max-w-12 pb-2" src={MoreOptions} alt="more options"/>   
                     </div>
                      
-                    <div className="recommended  w-full relative ">
+                    <div className="recommended relative">
                            <div className="rec-images h-48 w-52 rounded-lg overflow-hidden flex gap-1">    
                              {movie.threeupcomingMovies.map(item=> <div className="h-full w-auto" key={item.upcomingID} onClick={navigateToMovie}><img className="h-full w-full object-cover" src={upcomingImageUrl+item.upcomingBackdrop} id={item.upcomingID} alt="recommended movie" /></div>)}
 
                             </div>    
                             <div className="shows  w-full h-8 absolute bottom-0 left-0 flex gap-1 items-center rounded-b-lg bg-[#12121280]">
                                 <img src={List} alt="recommended shows" className="w-[20px] h-[20px]" />   
-                                <p className=" tex-white text-[9px]">The Best Movies and Shows in September</p>      
+                                <p className=" tex-white text-[9px]">The Best Movies and Shows this month.</p>      
                             </div>      
                               
                     </div>         
@@ -243,101 +254,3 @@ async function loadMovie(movieId){
 
 }
  
-
-//  {
-//     "adult": false,
-//     "backdrop_path": "/5mzr6JZbrqnqD8rCEvPhuCE5Fw2.jpg",
-//     "belongs_to_collection": {
-//         "id": 742536,
-//         "name": "The Meg Collection",
-//         "poster_path": "/7sAnVGMn5he5NZBZCE6fhDpA7fl.jpg",
-//         "backdrop_path": "/rNoyJmjdhgn30bVbvd8n3DJMocB.jpg"
-//     },
-//     "budget": 129000000,
-//     "genres": [
-//         {
-//             "id": 28,
-//             "name": "Action"
-//         },
-//         {
-//             "id": 878,
-//             "name": "Science Fiction"
-//         },
-//         {
-//             "id": 27,
-//             "name": "Horror"
-//         }
-//     ],
-//     "homepage": "https://www.themeg.movie",
-//     "id": 615656,
-//     "imdb_id": "tt9224104",
-//     "original_language": "en",
-//     "original_title": "Meg 2: The Trench",
-//     "overview": "An exploratory dive into the deepest depths of the ocean of a daring research team spirals into chaos when a malevolent mining operation threatens their mission and forces them into a high-stakes battle for survival.",
-//     "popularity": 2943.17,
-//     "poster_path": "/4m1Au3YkjqsxF8iwQy0fPYSxE0h.jpg",
-//     "production_companies": [
-//         {
-//             "id": 56242,
-//             "logo_path": "/1YORRYmg7hgYIgoJek8jU3cykuQ.png",
-//             "name": "Apelles Entertainment",
-//             "origin_country": "US"
-//         },
-//         {
-//             "id": 174,
-//             "logo_path": "/IuAlhI9eVC9Z8UQWOIDdWRKSEJ.png",
-//             "name": "Warner Bros. Pictures",
-//             "origin_country": "US"
-//         },
-//         {
-//             "id": 435,
-//             "logo_path": "/AjzK0s2w1GtLfR4hqCjVSYi0Sr8.png",
-//             "name": "di Bonaventura Pictures",
-//             "origin_country": "US"
-//         },
-//         {
-//             "id": 92484,
-//             "logo_path": "/dfWwoWRp8snHjzDKO5IFkiCAUe7.png",
-//             "name": "CMC Pictures",
-//             "origin_country": "CN"
-//         },
-//         {
-//             "id": 208093,
-//             "logo_path": null,
-//             "name": "DF Pictures",
-//             "origin_country": ""
-//         },
-//         {
-//             "id": 208094,
-//             "logo_path": null,
-//             "name": "Onaroll Productions",
-//             "origin_country": ""
-//         }
-//     ],
-//     "production_countries": [
-//         {
-//             "iso_3166_1": "CN",
-//             "name": "China"
-//         },
-//         {
-//             "iso_3166_1": "US",
-//             "name": "United States of America"
-//         }
-//     ],
-//     "release_date": "2023-08-02",
-//     "revenue": 384056482,
-//     "runtime": 116,
-//     "spoken_languages": [
-//         {
-//             "english_name": "English",
-//             "iso_639_1": "en",
-//             "name": "English"
-//         }
-//     ],
-//     "status": "Released",
-//     "tagline": "Back for seconds.",
-//     "title": "Meg 2: The Trench",
-//     "video": false,
-//     "vote_average": 7.02,
-//     "vote_count": 1669
-// // }

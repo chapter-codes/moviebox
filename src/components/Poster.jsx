@@ -15,7 +15,7 @@ export default function Poster({ poster }) {
   return (<>
     <div className={`poster  w-full pt-12 pb-6 bg-gray-500 relative bg-center bg-no-repeat bg-cover lg:h-[450px]`} style={{backgroundImage:`url(${imageBaseUrl+backdrop_path})`}} >
             <div className="poster-card px-6  md:px-12 relative z-10   sm:w-3/5 ">
-                <p className={`poster-title text-2xl  font-bold m py-8 md:text-2xl lg:text-3xl`}>{original_title}</p>
+                <p className={`poster-title text-2xl  font-bold m py-8 md:text-2xl lg:text-3xl`} onClick={()=>{navigate('/movies/'+id)}}>{original_title}</p>
                 <div className="rating flex gap-4">
                     <div className="imdb flex">
                         <img className=' w-9 h-4' src={Imdb} alt="imdb logo" />
@@ -26,7 +26,7 @@ export default function Poster({ poster }) {
                         <p className="text-xs">{(vote_average*10).toFixed(0)}%</p>
                     </div>
                 </div>
-                <p className="overview text-xs max-w-sm sm:max-w-full md:text-sm lg:max-w-lg py-8 ">{overview}</p>
+                <p className="overview text-xs pr-8 sm:max-w-full md:text-sm lg:max-w-lg py-8 ">{overview}</p>
                 <img className='w-40 h-9' src={WatchTrailer} alt="watch trailer" />
             </div>
     </div>
